@@ -1,0 +1,16 @@
+docker run --name sql \
+  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+  -e MYSQL_USER=pf_dev \
+  -e MYSQL_PASSWORD=password \
+  -e MYSQL_DATABASE=pf_dev \
+  -d mysql:5.7
+
+
+docker run --name red -d redis:3.2.1-alpine
+
+docker run --name pf \
+  --link sql:mysqldb \
+  --link red:redisdb \
+  -e REDIS_URL=redis://redisdb:6379 \
+  -p 80:80 \
+  -d pf
