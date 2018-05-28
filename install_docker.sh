@@ -38,5 +38,5 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Installing Docker"
-apt install docker-ce
+apt install -y docker-ce
 
